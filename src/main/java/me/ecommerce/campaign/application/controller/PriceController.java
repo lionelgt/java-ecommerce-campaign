@@ -18,11 +18,10 @@ import me.ecommerce.campaign.domain.service.PriceService;
 @RequestMapping("api/price")
 public class PriceController {
     private final PriceService priceService;
-    private final PriceAppMapper priceAppMapper;
 
     @GetMapping(consumes =  MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     PriceResponse findPrice(final @RequestBody  PriceRequest priceRequest) {
         Price price = priceService.findPrice(priceRequest);
-        return  priceAppMapper.toResponse(price, priceRequest);
+        return  PriceAppMapper.INSTANCE.toResponse(price, priceRequest);
     }
 }

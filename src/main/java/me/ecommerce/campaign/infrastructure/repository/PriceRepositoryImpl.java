@@ -17,11 +17,10 @@ import me.ecommerce.campaign.infrastructure.dao.mapper.PriceMapper;
 @RequiredArgsConstructor
 public class PriceRepositoryImpl implements PriceRepository {
     private final PriceRepositoryJpa priceRepositoryJpa;
-    private final PriceMapper priceMapper;
 
     @Override
     public List<Price> findPrice(PriceRequest priceRequest) {
         List<PriceEntity> prices = priceRepositoryJpa.findPrice(priceRequest.getProductId(), priceRequest.getBrandId(), priceRequest.getApplicationDate());
-        return prices.stream().map(priceMapper::toModel).collect(Collectors.toList());
+        return prices.stream().map(PriceMapper.INSTANCE::toModel).collect(Collectors.toList());
     }
 }

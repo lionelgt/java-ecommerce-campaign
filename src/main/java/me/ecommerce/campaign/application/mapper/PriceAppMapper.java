@@ -2,13 +2,16 @@ package me.ecommerce.campaign.application.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
+
 import me.ecommerce.campaign.application.dto.PriceRequest;
 import me.ecommerce.campaign.application.dto.PriceResponse;
 import me.ecommerce.campaign.domain.model.Price;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper
 public interface PriceAppMapper {
+    PriceAppMapper INSTANCE = Mappers.getMapper(PriceAppMapper.class);
+    
     @Mapping(source = "price.priceList", target="priceList")
     @Mapping(source = "price.productId", target="productId")
     @Mapping(source = "price.brandId", target="brandId")
